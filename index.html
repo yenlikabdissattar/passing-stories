@@ -1063,9 +1063,38 @@ body.rm *,body.rm *::before,body.rm *::after{animation:none!important;transition
 .acard .prow{margin-top:14px}
 .acard .prow .circ{width:56px;height:56px;border-radius:28px;background:rgba(17,17,18,.07)}
 .elev i{display:block;width:96px;height:8px;border-radius:4px;background:linear-gradient(90deg,#DCE6E9,#9DB3BB 45%,#4F6873)}
+
+/* ---------- Atlas: kept stamps turn over to show your photo and note ---------- */
+.st-hint{position:absolute;left:24px;right:24px;top:520px;z-index:5;text-align:center;font:500 12px/16px var(--ui);color:var(--ink2)}
+.flipwrap{position:absolute;inset:0;z-index:40;perspective:1400px;background:rgba(10,14,16,0);pointer-events:none;transition:background 400ms var(--soft)}
+.flipwrap.on{pointer-events:auto;background:rgba(10,14,16,.42)}
+.flip{position:absolute;left:39px;top:126px;width:312px;height:560px;transform-style:preserve-3d;visibility:hidden}
+.flipwrap.on .flip{visibility:visible}
+.flip .face{position:absolute;inset:0;border-radius:26px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;
+  background:#EEF3F5;box-shadow:0 24px 60px rgba(0,0,0,.28)}
+.flip .front{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center}
+.flip .front .t-cap{color:var(--ink2)}
+.flip .back{transform:rotateY(180deg);display:flex;flex-direction:column;padding:18px 18px 16px;gap:10px;overflow-y:auto;scrollbar-width:none}
+.flip .back::-webkit-scrollbar{display:none}
+.fb-top{display:flex;justify-content:space-between;align-items:center}
+.fb-top .seal{transform:rotate(-3deg)}
+.fb-x{width:40px;height:40px;border-radius:20px;background:rgba(17,17,18,.07);display:grid;place-items:center;color:var(--ink)}
+.fb-title{font:400 26px/30px var(--display)}
+.fb-img{width:100%;height:250px;border-radius:16px;object-fit:cover;flex:none;background:#DCE6E9}
+.fb-note{font:500 17px/24px var(--ui);word-break:keep-all;overflow-wrap:anywhere;white-space:pre-wrap}
+.fb-meta{font:500 12px/16px var(--ui);color:var(--ink2)}
+.fb-empty{font:400 15px/21px var(--ui);color:var(--ink2)}
+.fb-row{display:flex;gap:8px;margin-top:auto;flex-wrap:wrap}
+.fb-row .btn{flex:1;min-width:120px}
+.flip .back .nt-photo{height:200px;flex:none}
+.flip .back textarea{display:block;width:100%;border:1.5px solid rgba(17,17,18,.15);border-radius:14px;padding:12px 14px;font:400 16px/22px var(--ui);background:#fff;resize:none;color:var(--ink);flex:none}
+.flip .back textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+.fb-link{font:600 14px/1 var(--ui);color:var(--accent);background:none;align-self:flex-start;padding:8px 0;cursor:pointer}
+.st .seal{transition:transform 300ms var(--soft)}
+.st[data-stamp]:hover .seal{transform:rotate(0) translateY(-2px)}
 /* ---------- v12 ---------- */
 .wel-demo{font:500 12px/16px var(--ui);color:rgba(255,255,255,.78);max-width:300px}
-.tabbar{left:50px;width:290px}
+.tabbar{left:105px;width:180px}
 .tabbar span{position:relative}
 .tabbar span b{font:inherit}
 .beta-dot{position:absolute;top:6px;right:16px;font:700 9px/14px var(--ui);font-style:normal;color:#fff;background:var(--ink-red);border-radius:7px;padding:0 4px}
@@ -1166,8 +1195,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation:none!important;transition
   <button data-jump="kept">13 Kept</button>
   <button data-jump="atlas">14 Atlas · Kept</button>
   <button data-jump="seen">15 Atlas · Seen</button>
-  <div class="grp">Beta</div>
-  <button data-jump="notes">16 Field notes (photo + note)</button>
+
   <div class="grp">States</div>
   <button data-jump="s-loading">S1 Loading</button>
   <button data-jump="s-location">S2 Location off</button>
@@ -1188,7 +1216,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation:none!important;transition
     <li>Reduce motion: every change becomes a 150 ms fade, and loops stop.</li>
   </ul>
   <button class="rmbtn" data-rm="1">Reduce motion: off</button>
-  <p style="margin-top:16px;font-size:12px">Story text drafted with AI from published biographies of Yun Dong-ju; check facts before testing. Photos: Korea Heritage Service (국가유산청), heritage.go.kr. They carry no KOGL mark, so ask the agency before public use. Maps and walking distances: Mapbox (© Mapbox © OpenStreetMap). v12 (18 Nov): Era button on the map (Now · 1942 · 1927 · 1861 · 1420s Sejong) using Seoul Historical Archive maps; contour terrain map; Korean language (EN/한 button); Field notes beta (photo + short note, kept on this device only); third tab; class-demo note on the first screen. v11: the three map screens are one map you can drag and zoom around Sinchon (Yonsei, Ewha, Sinchon station, Nogosan), with 13 pins; tap a pin for its archive photos and a walking route. Map images: Mapbox light and outdoors styles, saved with the page; distances and routes from Mapbox walking directions. Archive photos: Seoul Museum of History, Seoul Historical Archive (서울역사아카이브), KOGL Type 1 (free to use with credit); check each record page before public use. Pins marked approximate need checking on site. Places and dates from the heritage portal; the Main Gate year is the June 1987 event (Lee Han-yeol), not a building date.</p>
+  <p style="margin-top:16px;font-size:12px">Story text drafted with AI from published biographies of Yun Dong-ju; check facts before testing. Photos: Korea Heritage Service (국가유산청), heritage.go.kr. They carry no KOGL mark, so ask the agency before public use. Maps and walking distances: Mapbox (© Mapbox © OpenStreetMap). v12 (18 Nov): Era button on the map (Now · 1942 · 1927 · 1861 · 1420s Sejong) using Seoul Historical Archive maps; contour terrain map; Korean language (EN/한 button); photo and note on the back of each kept Atlas stamp (tap to turn it over, kept on this device only); class-demo note on the first screen. v11: the three map screens are one map you can drag and zoom around Sinchon (Yonsei, Ewha, Sinchon station, Nogosan), with 13 pins; tap a pin for its archive photos and a walking route. Map images: Mapbox light and outdoors styles, saved with the page; distances and routes from Mapbox walking directions. Archive photos: Seoul Museum of History, Seoul Historical Archive (서울역사아카이브), KOGL Type 1 (free to use with credit); check each record page before public use. Pins marked approximate need checking on site. Places and dates from the heritage portal; the Main Gate year is the June 1987 event (Lee Han-yeol), not a building date.</p>
 </aside>
 
 <div class="phone" id="phone" data-tone="dark">
@@ -1465,10 +1493,17 @@ body.rm *,body.rm *::before,body.rm *::after{animation:none!important;transition
   <div class="seg glass-l aseg"><span class="on">Kept</span><span data-go="seen" data-tr="fade">Seen</span></div>
   <div class="stamps">
     <div class="st" data-soon><div class="eslot">01</div><span class="t-cap dim">Underwood Hall<span class="yr">1924</span></span></div>
-    <div class="st tap" data-go="story"><div class="seal w2" style="--wear:.65;width:92px;height:92px;font-size:33px;transform:rotate(-3deg)"><div class="sk"><span>동</span><span>주</span></div></div><span class="t-cap">Yun Dong-ju Stone<span class="yr">1941 · 85 yrs ago</span></span></div>
-    <div class="st" data-soon><div class="seal w3" style="--wear:.86;width:92px;height:92px;font-size:25px;transform:rotate(2deg)"><div class="sk"><span>스</span><span>팀</span><span>슨</span></div></div><span class="t-cap">Stimson Hall<span class="yr">1920 · 106 yrs ago</span></span></div>
+    <div class="st tap" data-stamp="yun" role="button" aria-label="Turn over the Yun Dong-ju Stone stamp"><div class="seal w2" style="--wear:.65;width:92px;height:92px;font-size:33px;transform:rotate(-3deg)"><div class="sk"><span>동</span><span>주</span></div></div><span class="t-cap">Yun Dong-ju Stone<span class="yr">1941 · 85 yrs ago</span></span></div>
+    <div class="st tap" data-stamp="stimson" role="button" aria-label="Turn over the Stimson Hall stamp"><div class="seal w3" style="--wear:.86;width:92px;height:92px;font-size:25px;transform:rotate(2deg)"><div class="sk"><span>스</span><span>팀</span><span>슨</span></div></div><span class="t-cap">Stimson Hall<span class="yr">1920 · 106 yrs ago</span></span></div>
     <div class="st" data-soon><div class="eslot">04</div><span class="t-cap dim">Main Gate<span class="yr">June 1987</span></span></div>
     <div class="st" data-soon><div class="eslot">05</div><span class="t-cap dim">Old Sinchon Station<span class="yr">1920</span></span></div>
+  </div>
+  <p class="st-hint" data-i18n="stampHint">Tap a kept stamp to turn it over</p>
+  <div class="flipwrap" id="flipWrap" aria-hidden="true">
+    <div class="flip" id="flip" role="dialog" aria-modal="true" aria-label="Stamp">
+      <div class="face front" id="flipFront"></div>
+      <div class="face back" id="flipBack"></div>
+    </div>
   </div>
   <div class="mini"><div class="bg im-mini"></div><div class="pin kept" style="left:108px;top:68px"></div><div class="pin kept" style="left:175px;top:4px"></div></div>
   <div class="tabbar glass-l"><span data-go="map" data-tr="tab"><svg class="i" viewBox="0 0 24 24"><path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6 9 4Z"/><path d="M9 4v14M15 6v14"/></svg>Map</span><span class="on"><svg class="i" viewBox="0 0 24 24"><rect x="4.5" y="4.5" width="15" height="15" rx="2"/><path d="M8.5 9.5h7M8.5 13h7M8.5 16.5h4"/></svg>Atlas</span></div>
@@ -1667,7 +1702,7 @@ function back(){
   const to = $(p.id); to.dataset.keepState = '1';
   animate(cur, to, p.tr, true); mark(p.id);
 }
-function show(id){ const to = $(id); if (cur && cur !== to) { if (cur.id === 'story') stopVoice(); clear(cur); cur.classList.remove('on'); } cur = null; animate(null, to); cur = to; }
+function show(id){ if (typeof STAMPS !== 'undefined' && STAMPS.close) STAMPS.close(); const to = $(id); if (cur && cur !== to) { if (cur.id === 'story') stopVoice(); clear(cur); cur.classList.remove('on'); } cur = null; animate(null, to); cur = to; }
 function jump(id){
   stack.length = 0;
   if (id === 'story-detailed') { show('story'); setVersion('detailed'); mark(id); return; }
@@ -1777,7 +1812,7 @@ const I18N = {
     addPhoto: 'Add a photo', changePhoto: 'Change photo', notePh: 'One line about what you see (Korean or English)', place: 'Where', save: 'Save note', cancel: 'Cancel',
     saved: 'Note saved on this device.', needSomething: 'Add a photo or write a line first.', full: 'Couldn\'t save: this device is out of space for notes. Delete an older note and try again.',
     memOnly: 'This browser won\'t keep notes. They will disappear when you close the page.', del: 'Delete', keep: 'Keep', delQ: 'Delete this note?', deleted: 'Note deleted.',
-    photoErr: 'That photo couldn\'t be opened. Try a JPG or PNG.', nearPfx: 'Near ', storyEnOnly: 'This story is in English only for now.', otherLang: 'Chinese and Japanese aren\'t in this prototype yet.', langSet: 'Language: English' },
+    photoErr: 'That photo couldn\'t be opened. Try a JPG or PNG.', nearPfx: 'Near ', storyEnOnly: 'This story is in English only for now.', otherLang: 'Chinese and Japanese aren\'t in this prototype yet.', langSet: 'Language: English', stampHint: 'Tap a kept stamp to turn it over', yourSide: 'Your side of the stamp', yourSideB: 'Add a photo and a line about your visit.', turnBack: 'Turn back', edit: 'Edit', readStory: 'Read the story', savedStamp: 'Saved on the back of the stamp.', keptOn: 'Kept ' },
   ko: { map: '지도', atlas: '아틀라스', notes: '노트', detailed: '상세', simple: '간단', terrain: '지형',
     closest: '가까운 순', near: n => '주변 이야기 ' + n + '곳', drag: '위로 끌기', minWalk: '분 도보', kept: '보관함',
     ago: n => n + '년 전', mw: w => w + '분 도보', walk: '여기로 걷기', read: '이야기 읽기', photos: n => '사진 ' + n + '장 · 넘겨 보기', approx: '핀 위치는 대략적입니다.',
@@ -1788,7 +1823,7 @@ const I18N = {
     addPhoto: '사진 추가', changePhoto: '사진 바꾸기', notePh: '보이는 것에 대해 한 줄 (한국어 또는 영어)', place: '장소', save: '노트 저장', cancel: '취소',
     saved: '이 기기에 노트를 저장했어요.', needSomething: '먼저 사진을 넣거나 한 줄을 써 주세요.', full: '저장하지 못했어요: 이 기기의 노트 저장 공간이 가득 찼습니다. 오래된 노트를 지우고 다시 시도해 주세요.',
     memOnly: '이 브라우저는 노트를 보관하지 않아요. 페이지를 닫으면 사라집니다.', del: '삭제', keep: '유지', delQ: '이 노트를 삭제할까요?', deleted: '노트를 삭제했어요.',
-    photoErr: '사진을 열 수 없어요. JPG나 PNG로 다시 시도해 주세요.', nearPfx: '', storyEnOnly: '이 이야기는 아직 영어로만 제공됩니다.', otherLang: '중국어와 일본어는 아직 이 프로토타입에 없어요.', langSet: '언어: 한국어' }
+    photoErr: '사진을 열 수 없어요. JPG나 PNG로 다시 시도해 주세요.', nearPfx: '', storyEnOnly: '이 이야기는 아직 영어로만 제공됩니다.', otherLang: '중국어와 일본어는 아직 이 프로토타입에 없어요.', langSet: '언어: 한국어', stampHint: '보관한 도장을 누르면 뒤집혀요', yourSide: '도장 뒷면', yourSideB: '방문 사진과 한 줄 메모를 남겨 보세요.', turnBack: '다시 뒤집기', edit: '수정', readStory: '이야기 읽기', savedStamp: '도장 뒷면에 저장했어요.', keptOn: '보관 ' }
 };
 const T = (k, ...a) => { const v = I18N[LANG][k]; return typeof v === 'function' ? v(...a) : v; };
 const nm = p => LANG === 'ko' ? (p.kn || p.n) : p.n;
@@ -1811,6 +1846,7 @@ function applyLang(){
   document.querySelectorAll('.welcome-lang').forEach(c => c.classList.toggle('glass-d', (c.dataset.l || 'en') !== LANG));
   if (typeof ERA !== 'undefined') ERA.refresh();
   if (typeof NOTESB !== 'undefined') NOTESB.render();
+  if (typeof STAMPS !== 'undefined' && STAMPS.refresh) STAMPS.refresh();
   if (typeof LM !== 'undefined') LM.refresh();
   document.documentElement.lang = LANG;
 }
@@ -2188,7 +2224,7 @@ const TAB_ICONS = {
 document.querySelectorAll('.tabbar').forEach(tb => {
   const s = tb.closest('.scr'), id = s ? s.id : '';
   const cur = /atlas|seen/.test(id) || id === 's-offline' ? 'atlas' : id === 'notes' ? 'notes' : 'map';
-  tb.innerHTML = ['map', 'atlas', 'notes'].map(k => '<span class="' + (k === cur ? 'on' : '') + '"' + (k === cur ? '' : ' data-go="' + k + '" data-tr="tab"') + '>' + TAB_ICONS[k] + '<b data-i18n="' + k + '">' + T(k) + '</b>' + (k === 'notes' ? '<i class="beta-dot">β</i>' : '') + '</span>').join('');
+  tb.innerHTML = ['map', 'atlas'].map(k => '<span class="' + (k === cur ? 'on' : '') + '"' + (k === cur ? '' : ' data-go="' + k + '" data-tr="tab"') + '>' + TAB_ICONS[k] + '<b data-i18n="' + k + '">' + T(k) + '</b>' + (k === 'notes' ? '<i class="beta-dot">β</i>' : '') + '</span>').join('');
 });
 
 /* ---------- eras: historical maps of Sinchon ---------- */
@@ -2341,6 +2377,120 @@ const NOTESB = (function(){
 })();
 
 
+
+
+/* ---------- Atlas: kept stamps turn over; the back holds the visitor's photo and note ---------- */
+const STAMPS = (function(){
+  const KEY = 'ps-stamps-v1';
+  const INFO = { yun: { name: 'Yun Dong-ju Stone', kn: '윤동주 시비', place: 1, story: true }, stimson: { name: 'Stimson Hall', kn: '스팀슨관', place: 2 } };
+  let data = {}, persist = true, openKey = null, editing = false, draftImg = '', busy = false;
+  try { data = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { persist = false; data = {}; }
+  const wrap = $('flipWrap'); if (!wrap) return {};
+  const card = $('flip'), front = $('flipFront'), backEl = $('flipBack');
+  function store(){ if (!persist) return true; try { localStorage.setItem(KEY, JSON.stringify(data)); return true; } catch (e) { return false; } }
+  function fmt(t){ try { return new Date(t).toLocaleDateString(LANG === 'ko' ? 'ko-KR' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); } catch (e) { return ''; } }
+  function shrink(f){ return new Promise((res, rej) => { const url = URL.createObjectURL(f), im = new Image(); im.onload = () => { const k = Math.min(1, 1000 / Math.max(im.naturalWidth, im.naturalHeight)); const c = document.createElement('canvas'); c.width = Math.round(im.naturalWidth * k); c.height = Math.round(im.naturalHeight * k); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg', .74)); }; im.onerror = () => { URL.revokeObjectURL(url); rej(); }; im.src = url; }); }
+  function sealHTML(st, size){
+    const seal = st.querySelector('.seal').cloneNode(true);
+    const f = parseFloat(seal.style.fontSize) || 30, w = parseFloat(seal.style.width) || 92;
+    seal.style.width = seal.style.height = size + 'px'; seal.style.fontSize = (f * size / w) + 'px';
+    return seal.outerHTML;
+  }
+  function nm(k){ const i = INFO[k]; return LANG === 'ko' ? i.kn : i.name; }
+  function renderBack(){
+    const k = openKey, d = data[k], st = document.querySelector('#atlas [data-stamp="' + k + '"]');
+    let h = '<div class="fb-top">' + sealHTML(st, 46) + '<button class="fb-x tap" data-fb="close" aria-label="' + T('turnBack') + '"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></button></div>';
+    h += '<span class="t-cap" style="color:var(--ink2)">' + T('yourSide') + '</span><h2 class="fb-title"></h2>';
+    if (d && !editing) {
+      if (d.img) h += '<img class="fb-img" alt="">';
+      h += '<p class="fb-note"></p><span class="fb-meta"></span>';
+      h += '<div class="fb-row"><button class="btn glass-l tap" data-fb="edit">' + T('edit') + '</button><button class="btn acc tap" data-fb="close">' + T('turnBack') + '</button></div>';
+    } else {
+      h += '<p class="fb-empty">' + T('yourSideB') + '</p>';
+      h += '<label class="nt-photo tap"><input type="file" id="fbFile" accept="image/*" capture="environment" hidden><div class="nt-prev' + (draftImg ? ' has' : '') + '" id="fbPrev">' + (draftImg ? '<img alt="">' : '') + '</div><span class="nt-photo-lbl"><svg class="i" viewBox="0 0 24 24"><path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3v10H4z"/><circle cx="12" cy="13.2" r="3.4"/></svg><b>' + (draftImg ? T('changePhoto') : T('addPhoto')) + '</b></span></label>';
+      h += '<textarea id="fbText" maxlength="140" rows="3" lang="ko"></textarea>';
+      h += '<div class="fb-row"><button class="btn acc tap" data-fb="save">' + T('save') + '</button><button class="btn text tap" data-fb="' + (d ? 'cancel' : 'close') + '">' + (d ? T('cancel') : T('turnBack')) + '</button></div>';
+    }
+    if (INFO[k].story) h += '<button class="fb-link tap" data-fb="story">' + T('readStory') + ' →</button>';
+    backEl.innerHTML = h;
+    backEl.querySelector('.fb-title').textContent = nm(k);
+    if (d && !editing) {
+      if (d.img) backEl.querySelector('.fb-img').src = d.img;
+      backEl.querySelector('.fb-note').textContent = d.text || '';
+      backEl.querySelector('.fb-meta').textContent = T('keptOn') + fmt(d.t);
+    } else {
+      const ta = $('fbText'); ta.placeholder = T('notePh'); ta.value = editing && d ? (d.text || '') : (ta.value || '');
+      if (draftImg) $('fbPrev').querySelector('img').src = draftImg;
+      $('fbFile').addEventListener('change', async ev => {
+        const f = ev.target.files && ev.target.files[0]; if (!f) return;
+        const keep = $('fbText').value;
+        try { draftImg = await shrink(f); renderBack(); $('fbText').value = keep; } catch (e2) { say(T('photoErr')); }
+      });
+    }
+  }
+  function renderFront(st){
+    const cap = st.querySelector('.t-cap');
+    front.innerHTML = sealHTML(st, 190) + '<span class="t-cap">' + cap.innerHTML + '</span>';
+  }
+  function stampTransform(st){
+    const ph = phone.getBoundingClientRect(), k = ph.width / 390;
+    const r = st.querySelector('.seal').getBoundingClientRect();
+    const sx = (r.left - ph.left + r.width / 2) / k, sy = (r.top - ph.top + r.height / 2) / k;
+    const cx = 39 + 156, cy = 126 + 280, sc = (r.width / k) / 312;
+    return 'translate(' + (sx - cx) + 'px,' + (sy - cy) + 'px) scale(' + sc + ')';
+  }
+  function open(st){
+    if (busy) return; busy = true;
+    openKey = st.dataset.stamp; editing = !data[openKey]; draftImg = data[openKey] && data[openKey].img || '';
+    renderFront(st); renderBack();
+    wrap.classList.add('on'); wrap.setAttribute('aria-hidden', 'false');
+    const from = stampTransform(st);
+    if (reduced()) { card.style.transform = 'rotateY(180deg)'; busy = false; return; }
+    st.style.visibility = 'hidden';
+    const a = card.animate([
+      { transform: from + ' rotateY(0deg)', offset: 0 },
+      { transform: 'translate(0,0) scale(1) rotateY(0deg)', offset: .42 },
+      { transform: 'translate(0,0) scale(1) rotateY(180deg)', offset: 1 }
+    ], { duration: 1250, easing: 'cubic-bezier(.45,.1,.25,1)', fill: 'forwards' });
+    a.onfinish = () => { card.style.transform = 'rotateY(180deg)'; a.cancel(); busy = false; };
+  }
+  function close(){
+    if (busy || !openKey) return; busy = true;
+    const st = document.querySelector('#atlas [data-stamp="' + openKey + '"]');
+    wrap.classList.remove('on'); wrap.setAttribute('aria-hidden', 'true');
+    const done = () => { card.style.transform = ''; st.style.visibility = ''; openKey = null; busy = false; };
+    if (reduced()) { done(); return; }
+    const a = card.animate([
+      { transform: 'translate(0,0) scale(1) rotateY(180deg)' },
+      { transform: 'translate(0,0) scale(1) rotateY(360deg)', offset: .55 },
+      { transform: stampTransform(st) + ' rotateY(360deg)' }
+    ], { duration: 900, easing: 'cubic-bezier(.3,.7,.2,1)', fill: 'forwards' });
+    a.onfinish = () => { a.cancel(); done(); };
+  }
+  document.querySelectorAll('#atlas [data-stamp]').forEach(st => {
+    st.addEventListener('click', e => { e.stopPropagation(); open(st); });
+    st.tabIndex = 0; st.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(st); } });
+  });
+  wrap.addEventListener('click', e => {
+    if (e.target === wrap) { close(); return; }
+    const b = e.target.closest('[data-fb]'); if (!b) return; e.stopPropagation();
+    const a = b.dataset.fb;
+    if (a === 'close') close();
+    if (a === 'edit') { editing = true; renderBack(); }
+    if (a === 'cancel') { editing = false; draftImg = data[openKey] && data[openKey].img || ''; renderBack(); }
+    if (a === 'story') { const k = openKey; close(); setTimeout(() => go('story'), reduced() ? 0 : 900); }
+    if (a === 'save') {
+      const text = ($('fbText').value || '').trim();
+      if (!draftImg && !text) { say(T('needSomething')); $('fbText').focus(); return; }
+      const old = data[openKey];
+      data[openKey] = { img: draftImg, text: text.slice(0, 140), t: old && old.t || Date.now() };
+      if (!store()) { if (old) data[openKey] = old; else delete data[openKey]; say(T('full')); return; }
+      editing = false; renderBack(); say(T('savedStamp'));
+    }
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && openKey) close(); });
+  return { close, refresh(){ if (openKey) renderBack(); } };
+})();
 
 /* ---------- phone navigation: screen picker ---------- */
 (function(){
