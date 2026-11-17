@@ -713,6 +713,23 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 /* ---------- phone navigation: screen picker ---------- */
 .mnav,.msheet{display:none}
+/* ---------- laptop: the app is the main thing; notes and screen list live in a drawer ---------- */
+@media (min-width:761px){
+  .app{justify-content:center;padding:28px 24px}
+  .side{position:fixed;left:0;top:0;bottom:0;width:340px;z-index:999;overflow-y:auto;background:var(--page);padding:76px 24px 32px;
+    box-shadow:6px 0 30px rgba(0,0,0,.14);transform:translateX(-105%);visibility:hidden;transition:transform 380ms cubic-bezier(.25,.8,.25,1),visibility 0s linear 380ms}
+  body.side-open .side{transform:none;visibility:visible;transition:transform 380ms cubic-bezier(.25,.8,.25,1)}
+  .side .side-x{position:absolute;top:18px;right:16px;width:40px;height:40px;padding:0;border-bottom:0;border-radius:20px;background:var(--side-line);color:var(--side-strong);font:400 22px/1 var(--ui);display:grid;place-items:center;cursor:pointer;border:0}
+  .mnav{display:flex;position:fixed;z-index:1000;left:20px;top:20px;align-items:center;height:40px;border-radius:20px;background:rgba(20,20,22,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#fff;font:600 14px/1 var(--ui);box-shadow:0 4px 16px rgba(0,0,0,.18)}
+  .mnav button{height:40px;min-width:42px;display:grid;place-items:center;color:#fff;background:none;border:0;font:inherit;padding:0 10px;cursor:pointer}
+  .mnav .mnav-cur{padding:0 14px;gap:8px;display:flex;align-items:center;white-space:nowrap;border-left:1px solid rgba(255,255,255,.15);border-right:1px solid rgba(255,255,255,.15);max-width:280px}
+  .mnav .mnav-cur span{overflow:hidden;text-overflow:ellipsis}
+  .mnav button:disabled{opacity:.3}
+  body.side-open .mnav .mnav-cur{max-width:150px}
+  .mnav button:focus-visible,.side-x:focus-visible{outline:2px solid #8EA2FF;outline-offset:2px}
+}
+@media (min-width:761px) and (prefers-reduced-motion:reduce){.side,.mnav{transition:none!important}}
+
 @media (max-width:760px){
   .mnav{display:flex;position:fixed;z-index:1000;left:50%;top:max(6px,env(safe-area-inset-top,0px));transform:translateX(-50%);align-items:center;height:34px;border-radius:17px;background:rgba(20,20,22,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#fff;font:600 13px/1 var(--ui);box-shadow:0 2px 12px rgba(0,0,0,.25);max-width:calc(100vw - 24px)}
   .mnav button{height:34px;min-width:40px;display:grid;place-items:center;color:#fff;background:none;border:0;font:inherit;padding:0 8px;cursor:pointer}
@@ -1126,7 +1143,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation:none!important;transition
   <div class="msheet-list" id="msheetList"></div>
   <p class="msheet-foot">Class demo with sample data. Inside the app, tap and swipe as usual; use ‹ › above to step through every screen.</p>
 </div>
-<aside class="side">
+<aside class="side" id="side" aria-label="About this prototype and all screens"><button class="side-x" id="sideX" aria-label="Close">×</button>
   <div class="kick">Team 5 · Hi-fi prototype v12 · 18 Nov 2026</div>
   <h1>Passing Stories</h1>
   <p>Greyscale glass with one blue accent; stamps are red ink on pale-blue paper, and older histories leave more worn stamps. A year rail beside each story shows which year you are reading about. Swipe to start, a tutorial that points at the real controls, and stories you scroll down like a webtoon, in a summary or detailed version, with voice-over if you want it.</p>
@@ -2329,19 +2346,21 @@ const NOTESB = (function(){
 (function(){
   const list = $('msheetList'), sheet = $('msheet'); if (!list) return;
   const items = []; let stop = false;
-  document.querySelectorAll('.side > *').forEach(el => {
+  document.querySelectorAll('.side > *:not(.side-x)').forEach(el => {
     if (stop) return;
     if (el.classList.contains('grp')) { if (/motion/i.test(el.textContent)) { stop = true; return; } const g = document.createElement('div'); g.className = 'g'; g.textContent = el.textContent; list.appendChild(g); }
     else if (el.matches('button[data-jump]')) { const b = document.createElement('button'); b.dataset.jump = el.dataset.jump; b.dataset.m = '1'; b.textContent = el.textContent; list.appendChild(b); items.push({ id: el.dataset.jump, label: el.textContent }); }
   });
   const order = items.map(i => i.id);
   function close(){ sheet.classList.remove('open'); }
-  $('mnavOpen').addEventListener('click', e => { e.stopPropagation(); sheet.classList.add('open'); const c = list.querySelector('.cur'); if (c) c.scrollIntoView({ block: 'center' }); });
+  $('sideX').addEventListener('click', e => { e.stopPropagation(); document.body.classList.remove('side-open'); $('mnavOpen').setAttribute('aria-expanded', 'false'); });
+  $('mnavOpen').addEventListener('click', e => { e.stopPropagation(); if (window.innerWidth > 760) { const o = document.body.classList.toggle('side-open'); $('mnavOpen').setAttribute('aria-expanded', o ? 'true' : 'false'); return; } sheet.classList.add('open'); const c = list.querySelector('.cur'); if (c) c.scrollIntoView({ block: 'center' }); });
   $('msheetX').addEventListener('click', e => { e.stopPropagation(); close(); });
   list.addEventListener('click', () => setTimeout(close, 60));
   let lastId = ''; function step(d){ const i = order.indexOf(lastId || (cur ? cur.id : '')); const n = i < 0 ? 0 : Math.min(order.length - 1, Math.max(0, i + d)); jump(order[n]); }
   $('mnavPrev').addEventListener('click', e => { e.stopPropagation(); step(-1); });
   $('mnavNext').addEventListener('click', e => { e.stopPropagation(); step(1); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.body.classList.remove('side-open'); close(); } });
   window.__mnavSet = id => {
     lastId = id;
     const it = items.find(x => x.id === id); $('mnavLabel').textContent = it ? it.label : 'Screens';
@@ -2352,7 +2371,7 @@ const NOTESB = (function(){
 (function(){
   const ph = document.getElementById('phone');
   function fit(){
-    if (window.innerWidth > 760) { ph.style.transform = ''; ph.style.marginTop = ''; ph.style.marginLeft = ''; return; }
+    if (window.innerWidth > 760) { const d = Math.min(1, (window.innerHeight - 56) / 844); ph.style.marginLeft = ''; ph.style.marginTop = ''; ph.style.transformOrigin = 'top center'; ph.style.transform = d < 1 ? 'scale(' + d + ')' : ''; ph.style.marginBottom = d < 1 ? (-844 * (1 - d)) + 'px' : ''; return; }
     const sc = Math.min(window.innerWidth / 390, window.innerHeight / 844);
     ph.style.marginLeft = '-195px';
     ph.style.transform = 'scale(' + sc + ')';
