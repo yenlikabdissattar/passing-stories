@@ -10,6 +10,14 @@ Team 5 hi-fi prototype for the Interaction Design course (Yonsei UIC, Fall 2026)
 
 This is a class demo with sample data. Field notes (beta) are stored only in your own browser. Please don't enter personal information.
 
+## Sinchon Archive Finds (updated daily)
+
+**Open it:** https://yenlikabdissattar.github.io/passing-stories/archive/
+
+Public-archive records about the Sinchon area (photos, maps, documents) that a scheduled collector finds every day. The page reads `archive/finds.json`, which the collector rewrites and pushes after each run with `archive/build_finds.py`.
+
+Every record, image and description comes from the source named on its entry (mainly the Seoul Historical Archive / Seoul Museum of History). Rights stay with those sources and reuse follows each record's licence. English titles and notes are our translations. Passing Stories takes no responsibility for what these sources deliver; check the original record before using anything.
+
 ## What's inside
 
 - Map of Sinchon you can drag and zoom, with 13 history pins and walking routes
