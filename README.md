@@ -23,6 +23,7 @@ The images in `archive/img/` are copies of the archive's own preview images (KOG
 ## What's inside
 
 - Map of Sinchon you can drag and zoom, with 21 history pins (13 stories + 8 added from the archive) and walking routes
+- A story for every place: a 1-minute summary and a longer detailed version (2–5 min), with archive photos inside the story. The Yun Dong-ju stone has the full 5-minute version.
 - Archive button: all 93 Seoul Historical Archive records about Sinchon, filtered by photos, maps and decade, each opening full size with its source link. Place cards show the archive photos for that spot. Images are saved in `archive/img/`.
 - Era button: 1942, 1927 and 1861 maps, and the 1420s (King Sejong's Yeonhuigung)
 - Detailed, Simple and Terrain (contour) map styles
