@@ -18,9 +18,12 @@ Public-archive records about the Sinchon area (photos, maps, documents) that a s
 
 Every record, image and description comes from the source named on its entry (mainly the Seoul Historical Archive / Seoul Museum of History). Rights stay with those sources and reuse follows each record's licence. English titles and notes are our translations. Passing Stories takes no responsibility for what these sources deliver; check the original record before using anything.
 
+The images in `archive/img/` are copies of the archive's own preview images (KOGL Type 1, except two KOGL Type 2 plans), credited to the Seoul Museum of History on every view.
+
 ## What's inside
 
-- Map of Sinchon you can drag and zoom, with 13 history pins and walking routes
+- Map of Sinchon you can drag and zoom, with 21 history pins (13 stories + 8 added from the archive) and walking routes
+- Archive button: all 93 Seoul Historical Archive records about Sinchon, filtered by photos, maps and decade, each opening full size with its source link. Place cards show the archive photos for that spot. Images are saved in `archive/img/`.
 - Era button: 1942, 1927 and 1861 maps, and the 1420s (King Sejong's Yeonhuigung)
 - Detailed, Simple and Terrain (contour) map styles
 - English and Korean (EN / 한 button)

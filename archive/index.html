@@ -128,7 +128,7 @@ footer p+p{margin-top:8px}
     const link=safeUrl(f.url);
     return `<article class="card">
       <a class="frame" href="${esc(link)}" target="_blank" rel="noopener" aria-label="Open the original record: ${esc(f.title)}">
-        ${img?`<img src="${esc(img)}" alt="${esc(f.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:''}
+        ${/^[A-Za-z0-9-]+$/.test(f.recordId||'')?`<img src="img/${esc(f.recordId)}.jpg" alt="${esc(f.title)}" loading="lazy" onload="var p=this.parentNode.querySelector('.ph');if(p)p.style.visibility='hidden'" data-alt="${esc(img||'')}" onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.dataset.alt='';this.referrerPolicy='no-referrer'}else{this.remove()}">`:(img?`<img src="${esc(img)}" alt="${esc(f.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:'')}
         <span class="ph"><span class="ko">${esc(f.titleKo||'')}</span><span class="cap">Image on the source page</span></span>
         <span class="cap kind">${esc(KIND[f.kind]||'Record')}</span>
       </a>
