@@ -1052,7 +1052,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation:none!important;transition
 .acard-ph{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:16px -22px 0;padding:0 22px;scrollbar-width:none}
 .acard-ph::-webkit-scrollbar{display:none}
 .acard-ph figure{flex:none;width:100%;scroll-snap-align:center}
-.acard-ph img,.acard-ph .bg{display:block;width:100%;height:200px;object-fit:cover;border-radius:18px;background:#C8D7DC}
+.acard-ph img,.acard-ph .bg{display:block;width:100%;height:200px;object-fit:cover;border-radius:18px;background-color:#C8D7DC;background-size:cover;background-position:center}
 .acard-ph .bg{position:relative}
 .acard-ph figcaption{font:500 12px/16px var(--ui);color:var(--ink2);margin-top:8px}
 .acard-ph figcaption b{display:block;font-weight:600;color:var(--ink)}
@@ -1802,17 +1802,17 @@ const PLACES = [
     txt: 'The central hall at the head of Baekyang-ro, named for Horace G. Underwood, who founded Chosen Christian College (연희전문), the school that became Yonsei. The second photo shows the colonial government permits for the college, issued in 1917.' },
   { n: 'Yun Dong-ju Poetry Stone', ko: ['동', '주'], kn: '윤동주 시비', cat: 'Literature', yr: 'Poem 1941', y: 1941, kept: true, open: true, story: true, approx: true, ll: [126.93762, 37.56628], ph: ['pinson'],
     txt: 'Yun Dong-ju studied at Yonhi College from 1938 and lived in the dormitory now called Pinson Hall. The stone in front of it carries his "Prelude" (서시).' },
-  { n: 'Stimson Hall', ko: ['스', '팀', '슨'], kn: '스팀슨관', cat: 'Architecture', yr: 'Built 1920', y: 1920, kept: true, story: true, ll: [126.93820, 37.56608],
+  { n: 'Stimson Hall', ko: ['스', '팀', '슨'], kn: '스팀슨관', cat: 'Architecture', yr: 'Built 1920', y: 1920, kept: true, story: true, ll: [126.93820, 37.56608], xk: ['quad'], xph: ['H-TRNS-84728-436', 'H-TRNS-75424-850'],
     txt: 'Finished in 1920, the oldest building on the campus. It stands on the west side of the quad, facing Appenzeller Hall across Underwood Hall.' },
   { n: 'Main Gate', ko: ['정', '문'], kn: '연세대 정문', cat: 'Democracy', yr: 'June 1987', y: 1987, story: true, approx: true, ll: [126.93683, 37.55995],
     txt: 'On 9 June 1987 Yonsei student Lee Han-yeol was struck in the head by a tear-gas canister in front of this gate. He died on 5 July, and his death drove the June Democratic Struggle.' },
   { n: 'Old Sinchon Station', ko: ['신', '촌'], kn: '구 신촌역사', cat: 'Everyday', yr: 'Built c. 1920', y: 1920, story: true, ll: [126.94306, 37.55972], ph: ['station'],
     txt: 'The small Gyeongui Line station building, one of the oldest station buildings left in Seoul. Sources give 1920 or 1921 for its opening. Registered Cultural Heritage No. 136.' },
-  { n: 'Appenzeller Hall', ko: ['아', '펜'], kn: '아펜젤러관', cat: 'Architecture', yr: 'Built 1924', y: 1924, ll: [126.93902, 37.56588],
+  { n: 'Appenzeller Hall', ko: ['아', '펜'], kn: '아펜젤러관', cat: 'Architecture', yr: 'Built 1924', y: 1924, ll: [126.93902, 37.56588], xk: ['quad'], xph: ['H-TRNS-75424-850'],
     txt: 'The east wing of the trio at the head of Baekyang-ro, named for missionary Henry G. Appenzeller.' },
-  { n: 'Ewha Pfeiffer Hall', ko: ['이', '화'], kn: '이화여대 파이퍼홀', cat: 'Architecture', yr: 'Built 1935', y: 1935, ll: [126.94758, 37.56251],
+  { n: 'Ewha Pfeiffer Hall', ko: ['이', '화'], kn: '이화여대 파이퍼홀', cat: 'Architecture', yr: 'Built 1935', y: 1935, ll: [126.94758, 37.56251], xph: ['H-TRNS-84475-435', 'H-TRNS-84818-437'],
     txt: 'Ewha moved its college from Jeong-dong to Sinchon in 1935. Pfeiffer Hall was its main building.' },
-  { n: 'Lee Han-yeol Memorial', ko: ['한', '열'], kn: '이한열기념관', cat: 'Democracy', yr: 'June 1987', y: 1987, ll: [126.93385, 37.55505],
+  { n: 'Lee Han-yeol Memorial', ko: ['한', '열'], kn: '이한열기념관', cat: 'Democracy', yr: 'June 1987', y: 1987, ll: [126.93385, 37.55505], xph: ['H-TRNS-84843-437', 'H-TRNS-84225-762'],
     txt: 'A small museum in Nogosan-dong on the life of Lee Han-yeol and June 1987, with objects from the day he was hit.' },
   { n: 'Sinchon Rotary', ko: ['로', '터', '리'], kn: '신촌로터리', cat: 'Everyday', yr: 'Photo 1980', y: 1980, approx: true, ll: [126.93690, 37.55525], ph: ['rotary', 'bus'],
     txt: 'In 1980 the city put up a temporary overpass here so traffic could keep moving while subway Line 2 was dug underneath; Sinchon station opened in 1984. The second photo is the No. 21 city bus terminus in Sinchon in 1962 (exact spot not recorded).' },
@@ -2182,7 +2182,8 @@ const LM = (function(){
     permit: { src: IMG.permit, t: 'Permits for Chosen Christian College', d: '1917', id: 'H-TRNS-75424-850' },
     underwood: { cls: 'im-underwood', t: 'Underwood Hall', d: 'Today', kh: 1 },
     pinson: { cls: 'im-pinson', t: 'Pinson Hall', d: 'Today', kh: 1 },
-    station: { cls: 'im-station', t: 'Old Sinchon Station', d: 'Today', kh: 1 }
+    station: { cls: 'im-station', t: 'Old Sinchon Station', d: 'Today', kh: 1 },
+    quad: { cls: 'im-underwood', t: 'The quad: Underwood Hall, with Stimson and Appenzeller on either side', d: 'Today', kh: 1 }
   };
   const ARCH = 'https://museum.seoul.go.kr/archive/search/NR_search.do?query=';
   const ME = [37.56592, 126.93866]; // [lat, lng]: in front of Underwood Hall
@@ -2256,7 +2257,7 @@ const LM = (function(){
     const p = PLACES[i]; if (!host) return;
     if (!card) { card = document.createElement('div'); card.className = 'acard glass-w'; }
     cardFor = i;
-    const num = String(i + 1).padStart(2, '0'), ph = p.ph || [], ar = arcFor(p.n), nph = ph.length + ar.length;
+    const num = String(i + 1).padStart(2, '0'), ph = (p.ph || []).concat(p.xk || []), ar = arcFor(p.n).concat((p.xph || []).map(id => ARCHIVE.find(a => a.id === id)).filter(Boolean)), nph = ph.length + ar.length;
     card.innerHTML = '<div class="grab"></div><button class="circ acard-x tap" aria-label="Close"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></button>' +
       '<span class="t-cap" style="color:var(--ink2)">No. ' + num + ' · ' + fmtD(p.d) + ' · ' + T('mw', p.w) + '</span>' +
       '<h2 class="t-l">' + nm(p) + '</h2><div class="ko">' + (LANG === 'ko' ? p.n : (p.kn || p.ko.join(''))) + '</div>' +
